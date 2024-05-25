@@ -3,8 +3,8 @@ import Image from 'next/image';
 import { UserButton } from '@clerk/nextjs';
 function NavBar() {
     return (
-        <div className='flex items-center 
-        justify-between p-3 px-5 shadow-sm border-b-[1px'>
+        <div className="flex items-center justify-between p-0.5 px-5 shadow-sm border-b-3 ">
+
            <Image src='/logo.png'
            alt='logo'
            width={100}
