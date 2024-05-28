@@ -6,7 +6,7 @@ function Hero() {
     <div className="grid grid-cols-1 md:grid-cols-2">
       <div>
         <h2 className="text-[40px] md:text-[60px] font-bold">
-          Premium Car Rental in Your Area
+          Premium Car <span className="text-blue-500">Rental</span> in Your Area
         </h2>
         <h2 className="text-[20px] text-gray-700">
           Book the Car Now
@@ -19,9 +19,9 @@ function Hero() {
         <Image
           src="/hero.png"
           alt="hero"
-          width={380} // Adjust the width of the image
-          height={2500} // Adjust the height of the image
-          className="object-cover" // Remove the unnecessary class
+          width={380} 
+          height={2500} 
+          className="object-cover" 
         />
       </div>
     </div>

@@ -5,7 +5,7 @@ import { FaGasPump } from 'react-icons/fa';
 import { BsArrowRight } from 'react-icons/bs';
 
 function CarCard(props: any) {
-  const [car, setCar] = useState(props.car);
+  const [car, setCar] = useState<any>();
 
   useEffect(()=>{
 if(props.car)
