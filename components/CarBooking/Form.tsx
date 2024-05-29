@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { useEffect ,useState} from 'react';
+import { getStoreLocations } from '@/services';
 
 function Form() {
-  return (
+    const [storeLocation,setStoreLocation]=useState<any>([]);
+    useEffect(() => {
+        getStoreLocations_();
+    }, []);
+
+    const getStoreLocations_ = async () => {
+        try {
+            const locations:any = await getStoreLocations();
+            console.log(locations);
+            setStoreLocation(locations?.storedLocations)
+        } catch (error) {
+            console.error('Error fetching store locations:', error);
+        }
+    };
+
+    return (
     <form className="flex flex-wrap gap-4">
       {/* Pickup Location Dropdown */}
       <div className="w-full md:w-1/2 lg:w-1/3">
         <label htmlFor="pickupLocation" className="block mb-1 text-gray-400">Pickup Location</label>
         <select id="pickupLocation" name="pickupLocation" className="w-full p-2 border border-gray-300 rounded-md">
-          {/* Add options for pickup locations */}
-          <option value="solo">Solo</option>
-          <option value="greede">Greede</option>
-          {/* Add more options as needed */}
-        </select>
+    <option disabled selected>Pickup Location?</option>
+    {storeLocation.map((loc:any,index:number) => (
+        <option key={index}>{loc.address}</option>
+    ))}
+</select>
+
       </div>
 
       {/* Pickup Date and Drop-off Date */}

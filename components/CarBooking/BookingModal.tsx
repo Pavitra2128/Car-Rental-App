@@ -4,12 +4,12 @@ import Form from './Form';
 
 function BookingModal({ selectedCar }: { selectedCar: any }) {
   const handleCloseModal = () => {
-    const modal = document.getElementById('my_modal_4');
+    const modal = document.getElementById('my_modal_4') as HTMLDialogElement;
     if (modal) modal.close();
   };
 
   return (
-    <form method="dialog" className="modal-box w-11/12 max-w-5xl">
+    <div className="modal-box w-11/12 max-w-5xl">
       <div className="flex justify-between items-center border-b-[1px] pb-2">
         <h3 className="text-[30px] font-light text-gray-400">
           Rent A Car Now!
@@ -28,7 +28,7 @@ function BookingModal({ selectedCar }: { selectedCar: any }) {
            <Form />
         </div>
       </div>
-    </form>    
+    </div>    
   );
 }
 
