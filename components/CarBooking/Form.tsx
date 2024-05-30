@@ -57,7 +57,7 @@ function Form({ car }: any) {
     if(resp)
       {
         setShowToastMsg(true);
-        window.history.back();
+        window.location.href = '/'; 
 
       }
   }
