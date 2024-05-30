@@ -76,7 +76,6 @@ function Form({ car }: any) {
       </div>
 
       {/* Pickup Date and Drop-off Date */}
-      <div className="w-full md:flex md:space-x-4 lg:w-1/3">
         <div className="w-full">
           <label htmlFor="pickupDate" className="block mb-1 text-gray-400">Pickup Date</label>
           <input type="date" id="pickupDate" name="pickupDate" className="w-full p-2 border border-gray-300 rounded-md" onChange={handleChange} />
@@ -85,7 +84,7 @@ function Form({ car }: any) {
           <label htmlFor="dropoffDate" className="block mb-1 text-gray-400">Drop-off Date</label>
           <input type="date" id="dropoffDate" name="dropoffDate" className="w-full p-2 border border-gray-300 rounded-md" onChange={handleChange} />
         </div>
-      </div>
+    
 
       {/* Pickup Time and Drop-off Time */}
       <div className="w-full md:w-1/2 lg:w-1/3">
@@ -103,9 +102,9 @@ function Form({ car }: any) {
         <input type="tel" id="contactNumber" name="contactNumber" className="w-full p-2 border border-gray-300 rounded-md" onChange={handleChange} />
       </div>
 
-      {/* Submit Button */}
-      <div className="w-full">
-        <button type="button" className="w-full p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600" onClick={handleSubmit}>Submit</button>
+      <div className="w-full flex justify-end items-center mt-4">
+        <button type="button" className="p-2 bg-blue-500 text-white rounded-md hover:bg-blue-600 text-sm" onClick={handleSubmit}>Save</button>
+        <button type="button" className="p-2 ml-2 bg-red-500 text-white rounded-md hover:bg-red-600 text-sm" onClick={() => window.location.href = '/'}>close</button>
       </div>
     </form>
   );
