@@ -16,7 +16,7 @@ if(props.car)
   return car&&(
     <div className="relative border border-transparent p-4 rounded-md shadow-md flex flex-col justify-between hover:border-blue-500 group transition-all">
       <div>
-        <h2 className="text-[20px] font-medium mb-2">{car.name}</h2>
+        <h2 className="text-[20px] font-bold medium mb-2 ">{car.name}</h2>
         <h2 className="text-[28px] font-bold mb-2">
           ₹{car.price}
           <span className="text-[12px] font-light">/day</span>
