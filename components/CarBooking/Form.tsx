@@ -14,7 +14,7 @@ function Form({ car }: any) {
     dropoffTime: '',
     contactNumber: '',
     userName: '',
-    carId: ""
+    carId: ''
   });
 
   const [errors, setErrors] = useState({
@@ -51,39 +51,27 @@ function Form({ car }: any) {
   };
 
   const handleChange = (event: any) => {
+    const { name, value } = event.target;
     setFormValue({
       ...formValue,
-      [event.target.name]: event.target.value
+      [name]: value
     });
+
+    // Real-time validation for contact number
+    
   };
 
-  const handleSubmit = async () => {
-    let isValid = true;
-    const newErrors: any = {};
+  const handleSubmit=async()=>{
 
-    // Check if all fields are filled
-    Object.keys(formValue).forEach(key => {
-      if (!formValue[key]) {
-        newErrors[key] = 'This field is required.';
-        isValid = false;
-      }
-    });
-
-    if (!isValid) {
-      setErrors(newErrors);
-      return;
-    }
-
-    // Submit the form if valid
     console.log(formValue);
-    const resp = await createBooking(formValue);
+    const resp=await createBooking(formValue);
     console.log(resp);
-    if (resp) {
-      setShowToastMsg(true);
-      window.location.href = '/';
-    }
-  };
-
+    if(resp)
+      {
+        setShowToastMsg(true);
+        window.location.href = '/';
+      }
+  }
   return (
     <form className="flex flex-wrap gap-4">
       {/* Pickup Location Dropdown */}
