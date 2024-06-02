@@ -19,6 +19,7 @@ export const getCarsList = async () => {
         }
         carType
         carBrand
+        location
       }
     }
   `;

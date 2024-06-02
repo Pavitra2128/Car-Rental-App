@@ -1,14 +1,14 @@
 "use client";
+import React, { useEffect, useState } from 'react';
 import CarsFiltersOptions from "@/components/Home/CarsFiltersOptions";
 import CarsList from "@/components/Home/CarsList";
 import Hero from "@/components/Home/Hero";
 import SearchInput from "@/components/Home/SearchInput";
 import ToastMsg from "@/components/ToastMsg";
 import { BookCreatedFlagContext } from "@/context/BookCreatedFlagContext";
-import { getCarsList } from "@/services";
-import { useEffect, useState } from "react";
+import { getCarsList, getStoreLocations } from "@/services";
 
-export default function Home() {
+function Home() {
   const [carsList, setCarsList] = useState<any>([]);
   const [carsOrgList, setCarsOrgList] = useState<any>([]);
   const [sortOrder, setSortOrder] = useState<string>("");
@@ -22,9 +22,8 @@ export default function Home() {
     if (showToastMsg) {
       const timer = setTimeout(() => {
         setShowToastMsg(false);
-      }, 5000); // 4 seconds
+      }, 5000); // 5 seconds
 
-      // Cleanup the timeout when the component unmounts or when showToastMsg changes
       return () => clearTimeout(timer);
     }
   }, [showToastMsg]);
@@ -40,6 +39,18 @@ export default function Home() {
     setCarsList(filterList);
   };
 
+  const filterLocation = (location: string) => {
+    console.log("Filtering for location: ", location);
+    console.log("Original cars list: ", carsOrgList);
+  
+    const normalizedLocation = location.trim().toLowerCase();
+    const filterList = carsOrgList.filter((item: any) => item.location.trim().toLowerCase() === normalizedLocation);
+  
+    console.log("Filtered list: ", filterList);
+    setCarsList(filterList);
+  };
+  
+  
   const sortCarList = (order: string, list: any[]) => {
     let sortedList = [...list];
     if (order === "minToMax") {
@@ -58,7 +69,7 @@ export default function Home() {
     <div className="p-5 sm:px-10 md:px-20">
       <BookCreatedFlagContext.Provider value={{ showToastMsg, setShowToastMsg }}>
         <Hero />
-        <SearchInput />
+        <SearchInput setLocation={(value: string) => filterLocation(value)} />
         <CarsFiltersOptions
           carsList={carsOrgList}
           setBrand={(value: string) => filterCarList(value)}
@@ -70,3 +81,5 @@ export default function Home() {
     </div>
   );
 }
+
+export default Home;

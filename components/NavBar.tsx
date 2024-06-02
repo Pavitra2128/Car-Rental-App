@@ -16,13 +16,14 @@ function NavBar() {
             p-2 rounded-full hover:text-white'>Home</h2>
              <h2 className='hover:bg-blue-500
             px-3 cursor-pointer
-            p-2 rounded-full hover:text-white'>history</h2>
+            p-2 rounded-full hover:text-white'>History</h2>
              <h2 className='hover:bg-blue-500
             px-3 cursor-pointer
             p-2 rounded-full hover:text-white'>contact us</h2>
 
            </div>
            <UserButton />
+           
         </div>
     )
 }

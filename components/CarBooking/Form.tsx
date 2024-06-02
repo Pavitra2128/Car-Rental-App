@@ -108,7 +108,7 @@ function Form({ car }: any) {
   };
 
   const handleSubmit = async () => {
-    console.log('handleSubmit called'); // Add logging
+    console.log('handleSubmit called'); 
     if (validateForm()) {
       console.log('Form is valid. Submitting:', formValue); // Add logging
       try {
@@ -122,13 +122,12 @@ function Form({ car }: any) {
         console.error('Error creating booking:', error);
       }
     } else {
-      console.log('Form is not valid. Errors:', errors); // Add logging
+      console.log('Form is not valid. Errors:', errors); 
     }
   };
 
   return (
     <form className="flex flex-wrap gap-4">
-      {/* Pickup Location Dropdown */}
       <div className="w-full md:w-1/2 lg:w-1/3">
         <label htmlFor="pickupLocation" className="block mb-1 text-gray-400">Pickup Location</label>
         <select id="pickupLocation" name="pickupLocation" className="w-full p-2 border border-gray-300 rounded-md" onChange={handleChange} value={formValue.pickupLocation}>
