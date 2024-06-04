@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 
-function Hero() {
+function Hero({ scrollToCarsList }: { scrollToCarsList: () => void }) {
   return (
     <div className="grid grid-cols-1 md:grid-cols-2">
       <div>
@@ -11,11 +11,14 @@ function Hero() {
         <h2 className="text-[20px] text-gray-700">
           Book the Car Now
         </h2>
-        <button className="p-2 mt-5 bg-blue-500 text-white px-4 rounded-full hover:scale-105 transition-all">
+        <button 
+          className="p-2 mt-5 bg-blue-500 text-white px-4 rounded-full hover:scale-105 transition-all"
+          onClick={scrollToCarsList} // Call scrollToCarsList when button is clicked
+        >
           Explore Cars
         </button>
       </div>
-      <div className="md:flex md:justify-center md:items-center"> {/* Center the content vertically and horizontally in md screens */}
+      <div className="md:flex md:justify-center md:items-center">
         <Image
           src="/hero.png"
           alt="hero"

@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import CarsFiltersOptions from "@/components/Home/CarsFiltersOptions";
 import CarsList from "@/components/Home/CarsList";
 import Hero from "@/components/Home/Hero";
@@ -13,6 +13,7 @@ function Home() {
   const [carsOrgList, setCarsOrgList] = useState<any>([]);
   const [sortOrder, setSortOrder] = useState<string>("");
   const [showToastMsg, setShowToastMsg] = useState<boolean>(false);
+  const carsListRef = useRef<HTMLDivElement>(null); // Create a reference for CarsList
 
   useEffect(() => {
     getCarList_();
@@ -40,17 +41,11 @@ function Home() {
   };
 
   const filterLocation = (location: string) => {
-    console.log("Filtering for location: ", location);
-    console.log("Original cars list: ", carsOrgList);
-  
     const normalizedLocation = location.trim().toLowerCase();
     const filterList = carsOrgList.filter((item: any) => item.location.trim().toLowerCase() === normalizedLocation);
-  
-    console.log("Filtered list: ", filterList);
     setCarsList(filterList);
   };
-  
-  
+
   const sortCarList = (order: string, list: any[]) => {
     let sortedList = [...list];
     if (order === "minToMax") {
@@ -68,14 +63,16 @@ function Home() {
   return (
     <div className="p-5 sm:px-10 md:px-20">
       <BookCreatedFlagContext.Provider value={{ showToastMsg, setShowToastMsg }}>
-        <Hero />
+        <Hero scrollToCarsList={() => carsListRef.current?.scrollIntoView({ behavior: 'smooth' })} />
         <SearchInput setLocation={(value: string) => filterLocation(value)} />
         <CarsFiltersOptions
           carsList={carsOrgList}
           setBrand={(value: string) => filterCarList(value)}
           setSortOrder={(value: string) => setSortOrder(value)}
         />
-        <CarsList carsList={carsList} />
+        <div ref={carsListRef}>
+          <CarsList carsList={carsList} />
+        </div>
         {showToastMsg ? <ToastMsg /> : null}
       </BookCreatedFlagContext.Provider>
     </div>
