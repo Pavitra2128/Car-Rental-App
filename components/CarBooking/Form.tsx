@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { createBooking, getStoreLocations } from '@/services';
 import { BookCreatedFlagContext } from '@/context/BookCreatedFlagContext';
-
+import { useUser } from '@clerk/nextjs';
 function Form({ car }: any) {
   const [storeLocation, setStoreLocation] = useState<any>([]);
   const { showToastMsg, setShowToastMsg } = useContext(BookCreatedFlagContext);
-
+  const { user } = useUser();
+  const userId=user?.id;
   const [formValue, setFormValue] = useState({
     pickupLocation: '',
     pickupDate: '',
@@ -13,7 +14,7 @@ function Form({ car }: any) {
     pickupTime: '',
     dropoffTime: '',
     contactNumber: '',
-    userName: '',
+    userName: user?.id || '', 
     carId: ''
   });
 
@@ -106,13 +107,12 @@ function Form({ car }: any) {
     setErrors(newErrors);
     return isValid;
   };
-
   const handleSubmit = async () => {
     console.log('handleSubmit called'); 
     if (validateForm()) {
       console.log('Form is valid. Submitting:', formValue); // Add logging
       try {
-        const resp = await createBooking(formValue);
+        const resp = await createBooking(formValue, userId);
         console.log('Response from createBooking:', resp);
         if (resp) {
           setShowToastMsg(true);
@@ -125,7 +125,7 @@ function Form({ car }: any) {
       console.log('Form is not valid. Errors:', errors); 
     }
   };
-
+  
   return (
     <form className="flex flex-wrap gap-4">
       <div className="w-full md:w-1/2 lg:w-1/3">

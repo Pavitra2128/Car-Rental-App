@@ -17,7 +17,7 @@ function NavBar() {
                 <Link href="/">
                     <div className='hover:bg-blue-500 px-3 cursor-pointer p-2 rounded-full hover:text-white'>Home</div>
                 </Link>
-                <Link href="/history">
+                <Link href="/">
                     <div className='hover:bg-blue-500 px-3 cursor-pointer p-2 rounded-full hover:text-white'>History</div>
                 </Link>
                 <Link href="/contact">

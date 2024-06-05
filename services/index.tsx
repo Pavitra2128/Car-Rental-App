@@ -39,7 +39,11 @@ export const getStoreLocations = async () => {
   return result;
 };
 
-export const createBooking = async (formValue: any) => {
+export const createBooking = async (formValue: any, userId: string | undefined) => {
+  if (userId === undefined) {
+    throw new Error('User ID is undefined');
+  }
+
   const mutationQuery = gql`
     mutation MyMutation {
       createBooking(
@@ -48,7 +52,7 @@ export const createBooking = async (formValue: any) => {
           pickupDate: "${formValue.pickupDate}",
           dropoffTime: "${formValue.dropoffTime}",
           pickupTime: "${formValue.pickupTime}",
-          userName: "${formValue.userName}",
+          userName: "${userId}",
           carId: { connect: { id: "${formValue.carId}" } },
           contactNumber: "${formValue.contactNumber}"
         }
@@ -56,7 +60,8 @@ export const createBooking = async (formValue: any) => {
         id
       }
     }
-  `
+  `;
+
   const result = await request('https://api-ap-south-1.hygraph.com/v2/clwnee2yv04ll07uy5n2djv4f/master', mutationQuery);
   return result;
 };
